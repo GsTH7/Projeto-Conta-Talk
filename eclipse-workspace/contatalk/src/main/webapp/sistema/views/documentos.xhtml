@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+		<style>
+.ui-datepicker table, .ui-datepicker table * {
+	width: 30px !important;
+}
+</style>
+		<h:form id="form1">
+			<div class="ui-fluid">
+				<p:card style="width: 100vw; height: 100vh; box-sizing: border-box;">
+					<h1>Documentos</h1>
+					<br />
+					<br />
+					<div class="ui-fluid"></div>
+					<div class="Wid50 BorderedBox MarLeft05 Width25">
+						<div class="LabelContainer" onclick="PF('dialogSetores').show();"
+							style="display: flex; align-items: center;">
+							<div class="cssLink">
+								<p:graphicImage value="/sistema/resources/image/setores.png"
+									style="height: 110px; width: 110px; border-radius: 10%;" />
+							</div>
+							<span class="Counter-Text"
+								style="flex-grow: 1; text-align: center; font-size: 1.2em;">Setores</span>
+						</div>
+					</div>
+					<br />
+					<div class="Wid50 BorderedBox MarLeft05 Width25">
+						<div class="LabelContainer"
+							style="display: flex; align-items: center;"
+							onclick="PF('dialogAnexo').show();">
+							<div class="cssLink">
+								<p:graphicImage value="/sistema/resources/image/anexar.png"
+									style="height: 110px; width: 110px; border-radius: 100%;" />
+							</div>
+							<span class="Counter-Text"
+								style="flex-grow: 1; text-align: center; font-size: 1.2em;">Anexar
+								Arquivos</span>
+						</div>
+					</div>
+					<br />
+					<div class="Wid50 BorderedBox MarLeft05 Width25">
+						<div class="LabelContainer"
+							onclick="PF('dialogAssinatura').show();"
+							style="display: flex; align-items: center;">
+							<div class="cssLink">
+								<p:graphicImage value="/sistema/resources/image/assinatura.png"
+									style="height: 110px; width: 110px; border-radius: 100%;" />
+							</div>
+							<span class="Counter-Text"
+								style="flex-grow: 1; text-align: center; font-size: 1.2em;">Assinatura
+								de Documentos</span>
+						</div>
+					</div>
+					<br />
+				</p:card>
+				<p:dialog header="Anexo" widgetVar="dialogAnexo" id="dialogAnexo"
+					width="70%" height="50%" dynamic="false" closeOnEscape="true"
+					position="center" modal="true">
+
+					<p:column>
+						<p:growl id="messages" showDetail="true" for="obrigatorio" />
+						<p:outputLabel for="botaoArquivo" value="Obrigatório*"
+							style="margin-left: 3%;" id="obrigatorio" />
+
+						<p:fileUpload label="Arquivo anexado! Para substituir clique aqui"
+							uploadLabel="Enviar" cancelLabel="Cancelar"
+							allowTypes="/(\.|\/)(gif|jpeg|jpg|png)$/" sizeLimit="31457288"
+							invalidSizeMessage="O tamanho máximo permitido é de 30MB"
+							auto="false" id="botaoArquivo">
+						</p:fileUpload>
+					</p:column>
+				</p:dialog>
+				<p:dialog header="Assinatura" widgetVar="dialogAssinatura"
+					id="dialogAssinatura" width="70%" height="50%" dynamic="false"
+					closeOnEscape="true" position="center" modal="true">
+
+					<p:growl>
+						<p:autoUpdate />
+					</p:growl>
+
+					<p:signature style="width:100%;height:200px" widgetVar="sig"
+						value="#{beanAdmin.value}" required="true" guideline="true" />
+
+					<div style="display: flex; gap: 10px; margin: 20px 0;">
+						<p:commandButton value="Enviar" icon="pi pi-check" update="output" />
+						<p:commandButton value="Limpar" icon="pi pi-times" type="button"
+							onclick="PF('sig').clear()" styleClass="ui-button-flat" />
+					</div>
+
+					<p:outputPanel id="output">
+						<h:outputText rendered="#{not empty beanAdmin.value}"
+							style="font-size:1.5rem" styleClass="block mb-2"
+							value="Sua Assinatura" />
+						<p:signature style="width:100%;height:200px;"
+							value="#{beanAdmin.value}" readonly="true"
+							rendered="#{not empty beanAdmin.value}" backgroundColor="#eaeaea"
+							color="#03a9f4" />
+					</p:outputPanel>
+				</p:dialog>
+				<p:dialog header="Setores" widgetVar="dialogSetores"
+					id="dialogSetores" width="70%" height="50%" dynamic="false"
+					closeOnEscape="true" position="center" modal="true">
+
+					<div style="flex: 1; overflow-y: auto; margin-bottom: 20px;">
+						<ul style="list-style-type: disc; padding-left: 20px;">
+							<li style="margin-bottom: 10px;">Setor Administrativo -
+								Email: administrativo@consultcontrol.com.br</li>
+							<li style="margin-bottom: 10px;">Setor Financeiro - Email:
+								financeiro@consultcontrol.com.br</li>
+							<li style="margin-bottom: 10px;">Setor de Recursos Humanos -
+								Email: rh@consultcontrol.com.br</li>
+							<li style="margin-bottom: 10px;">Setor de Consultoria -
+								Email: consultoria@consultcontrol.com.br</li>
+							<li style="margin-bottom: 10px;">Setor de Marketing - Email:
+								marketing@consultcontrol.com.br</li>
+							<li style="margin-bottom: 10px;">Setor de Atendimento ao
+								Cliente* - Email: atendimento@consultcontrol.com.br</li>
+							<li style="margin-bottom: 10px;">Setor de Tecnologia da
+								Informação (TI)* - Email: ti@consultcontrol.com.br</li>
+							<li style="margin-bottom: 10px;">Setor de Compliance* -
+								Email: compliance@consultcontrol.com.br</li>
+							<li style="margin-bottom: 10px;">Setor Jurídico - Email:
+								juridico@consultcontrol.com.br</li>
+						</ul>
+					</div>
+				</p:dialog>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

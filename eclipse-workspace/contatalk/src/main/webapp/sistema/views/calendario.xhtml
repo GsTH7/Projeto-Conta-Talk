@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
+	lang="pt-br">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="head">
+		<link rel="stylesheet" href="../resources/css/acesso-layout.css" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<div
+			style="display: flex; justify-content: center; align-items: center; width: 375px; height: 667px; margin: 0 auto; box-sizing: border-box;">
+			<p:card style="width: 100%; height: 100%; padding: 0;">
+				<h2
+					style="font-family: Arial, sans-serif; text-align: center; margin-top: 10px;">Calendário</h2>
+				<div
+					style="max-width: 375px; height: 568px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; display: flex; flex-direction: column; box-sizing: border-box;">
+					<p:schedule value="#{scheduleView.eventModel}"
+						widgetVar="myschedule" locale="pt_BR" timeFormat="HH:mm"
+						aspectRatio="2.0" leftHeaderTemplate="prev,next today"
+						rightHeaderTemplate="month,agendaWeek,agendaDay"
+						style="overflow-x: auto; min-height: -webkit-fill-available; font-size: xx-small;">
+					</p:schedule>
+				</div>
+			</p:card>
+		</div>
+		<script type="text/javascript" src="../resources/js/acesso-action.js"></script>
+	</ui:define>
+</ui:composition>
+</html>

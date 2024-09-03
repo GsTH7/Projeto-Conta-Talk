@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+		<p:growl id="growl" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+		<p:card style="width: 100vw; height: 100vh; box-sizing: border-box;">
+			<div class="cssLink" align="center">
+				<p:graphicImage
+					value="/sistema/resources/image/semFundoContaTalk.png"
+					style="height: 80%; width: 65%;" />
+			</div>
+			<br />
+			<h:form enctype="multipart/form-data">
+				<p:inputText style="width:100%;" placeholder="email.adress@user.com" />
+				<br />
+				<br />
+				<p:inputTextarea style="width:100%;" placeholder="Seu texto..." />
+				<br />
+				<br />
+				<div align="center">
+					<p:fileUpload style="width: 80%;"
+						mode="simple" skinSimple="true" label="Selecionar Arquivo" />
+				</div>
+
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+
+				<div align="center">
+					<p:commandButton style="width: 45%;" value="Enviar" ajax="true"
+						styleClass="mt-3 ui-button-outlined block" actionListener="#{beanAdmin.showInfo}" update="growl"/>
+				</div>
+				<h:outputText
+					value="Ao clicar em 'enviar' você concorda com os Termos de uso e Política de privacidade."
+					style="font-size: 12px; color: #666; text-align: center; display: block; margin-top: 10px;" />
+
+			</h:form>
+		</p:card>
+	</ui:define>
+</ui:composition>
+</html>

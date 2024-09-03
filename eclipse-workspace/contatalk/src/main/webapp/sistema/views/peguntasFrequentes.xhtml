@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+		<p:card style="width: 100vw; height: 100vh; box-sizing: border-box;">
+			<div class="cssLink" align="center">
+				<p:graphicImage
+					value="/sistema/resources/image/semFundoContaTalk.png"
+					style="height: 80%; width: 65%;" />
+			</div>
+			<br />
+			<p:commandButton value="Peguntas Frequentes"
+				onclick="PF('dialogChat').show();" />
+		</p:card>
+		<p:dialog header="Tire suas dúvidas" widgetVar="dialogChat"
+			id="dialogChat" height="500px" style="width: 100vw; height: 100vh;"
+			dynamic="false" closeOnEscape="true" position="center" modal="true"
+			resizable="false">
+			<div
+				style="max-width: 90%; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; height: 100%; display: flex; flex-direction: column;">
+				<h:form id="form">
+
+					<div style="flex: 1; overflow-y: auto; margin-bottom: 20px;">
+						<h:outputText value="Aperte 1 para como anexar um arquivo."
+							style="display: block; margin-bottom: 10px;" />
+						<h:outputText value="Aperte 2 para como dar um feedback."
+							style="display: block; margin-bottom: 10px;" />
+						<h:outputText value="Aperte 3 para como realizar o ponto."
+							style="display: block; margin-bottom: 10px;" />
+					</div>
+
+					<div>
+						<h:panelGroup id="msg">
+							<h:outputText rendered="#{beanAdmin.renderizaMensagem}"
+								value="#{beanAdmin.mensagem}" style="max-width: 65%; word-wrap: break-word; overflow: hidden; position: absolute;"/>
+						</h:panelGroup>
+					</div>
+
+					<div class="ui-inputgroup"
+						style="display: flex; align-items: center; border-top: none; padding-top: 10px; height: 500px;">
+						<p:inputText placeholder="Digite uma mensagem"
+							value="#{beanAdmin.valores}" id="inpt"
+							style="flex: 1; border-radius: 20px; padding: 10px; max-width: 90%; word-wrap: break-word; overflow: hidden;">
+							<p:ajax event="change" process="@this" />
+						</p:inputText>
+						<div class="ui-inputgroup-addon" style="margin-left: 10px; border: none; background: none;">
+							<p:commandButton action="#{beanAdmin.mensagens()}"
+								process="@this inpt" icon="pi pi-send"
+								style="font-size: 1.5em; color: #007bff;" update="msg" />
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
+	lang="pt-br">
+
+<ui:composition template="topBarLogin.xhtml">
+	<ui:define name="conteudo">
+		<script>
+    window.onload = function() {
+        document.getElementById('user').focus();
+    }
+
+    function key_EnterID(id, e) {
+        var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+        if (keyCode === 13) { // Verifica se a tecla Enter foi pressionada
+            document.getElementById(id).focus();
+            e.preventDefault(); // Impede o comportamento padrão do Enter
+            return false;
+        }
+        return true;
+    }
+</script>
+		<style>
+.ui-card .ui-card-body {
+	height: 70%;
+}
+
+* {
+	font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #f6f8fc;
+}
+
+.top-bar {
+	display: inline-flex;
+	justify-content: center;
+	background-color: #021738;
+	width: 100%;
+	height: 60px;
+}
+
+.home-TopBar {
+	text-decoration: none;
+	margin-top: 0px !important;
+	padding: 0 5px 5px 5px;
+	transition: background-color 0.2s ease;
+}
+
+.home-TopBar-Branco {
+	color: #ffffff;
+	font-size: 32px;
+	padding: 0.05em;
+}
+
+.layout-topbar-icon:hover {
+	background-color: #021738;
+}
+
+.container {
+	max-width: 600px;
+	margin: 30px auto;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-message {
+	background-color: #d9edf7;
+	color: #31708f;
+	padding: 10px;
+	margin-bottom: 10px;
+	list-style-type: none;
+	font-weight: bold;
+}
+
+.warn-message {
+	background-color: #fcf8e3;
+	color: #8a6d3b;
+	padding: 10px;
+	margin-bottom: 10px;
+	list-style-type: none;
+	font-weight: bold;
+}
+
+.error-message {
+	background-color: #f2dede;
+	color: #a94442;
+	padding: 10px;
+	margin-bottom: 10px;
+	list-style-type: none;
+	font-weight: bold;
+}
+
+h1, h2 {
+	text-align: center;
+	color: #333;
+}
+
+.panel-header-clicavel .ui-panel-titlebar {
+	cursor: pointer;
+}
+
+.ui-button {
+	width: 100%;
+	font-size: 18px !important;
+	background-color: #021738 !important;
+	color: #fff !important;
+	border: none !important;
+	border-radius: 5px;
+}
+
+.ui-button:hover {
+	background-color: #8ccafb !important;
+	border-color: #45a049;
+}
+
+.ui-panelgrid .p-grid .ui-panelgrid-cell, .ui-panelgrid .ui-grid-responsive .ui-panelgrid-cell
+	{
+	padding-left: .25rem !important;
+	padding-right: .25rem !important;
+	padding-bottom: .25rem !important;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-header.ui-state-active a {
+	color: #021738 !important;
+}
+
+.ui-tabs.ui-tabs-top>.ui-tabs-nav li.ui-tabs-header.ui-state-active {
+	border-color: #45a049 !important;
+}
+
+.ui-radiobutton .ui-radiobutton-box.ui-state-active {
+	color: #021738 !important;
+	border-color: #45a049 !important;
+	background: #021738 !important;
+}
+
+.ui-selectonemenu.ui-state-focus, .ui-button.ui-state-focus,
+	.ui-inputfield.ui-state-focus, .ui-radiobutton-box.ui-state-focus,
+	.ui-paginator-page.ui-state-focus, .ui-paginator-first.ui-state-focus,
+	.ui-paginator-prev.ui-state-focus, .ui-paginator-next.ui-state-focus,
+	.ui-paginator-last.ui-state-focus {
+	border-color: #45a049 !important;
+	box-shadow: 0 0 0 0.2em #021738 !important;
+}
+
+.ui-state-hover {
+	border-color: #45a049 !important;
+}
+
+.ui-state-highlight {
+	background: #021738 !important;
+}
+
+.ui-paginator-page.ui-state-active {
+	background: #021738 !important;
+}
+
+.ui-tabs-outline {
+	box-shadow: 0 0 0 0.2em #021738 !important;
+}
+
+.ui-spinner-button {
+	border-radius: 0 !important;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	padding-bottom: 0 !important;
+}
+
+.campoVisualizar {
+	width: 100%;
+}
+
+.layout-wrapper .layout-topbar .layout-menu-button {
+	display: inline-block;
+	vertical-align: middle;
+	width: 45px;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	-moz-transition: background-color 0.2s;
+	-o-transition: background-color 0.2s;
+	-webkit-transition: background-color 0.2s;
+	transition: background-color 0.2s;
+}
+
+.layout-wrapper .layout-topbar .layout-menu-button i {
+	line-height: inherit;
+	font-size: 30px;
+}
+
+.layout-wrapper.layout-horizontal .layout-topbar .layout-menu-button,
+	.layout-wrapper.layout-slim .layout-topbar .layout-menu-button {
+	display: none;
+}
+
+.custom-overlay {
+	border: 1px solid #ccc;
+	background-color: #fff;
+	padding: 10px;
+}
+
+.ui-tabmenu.ui-tabs-left .ui-tabmenu-nav .ui-tabmenuitem {
+	border: none !important;
+}
+
+.acesso-container {
+	resize: vertical; /* permite ajustar o tamanho verticalmente */
+	overflow: auto; /* adiciona uma barra de rolagem se necessário */
+	line-height: 1.6;
+	padding: 10px;
+}
+
+.LabelContainer {
+	display: flex;
+	flex-direction: row; /* Alinhar os rï¿½tulos verticalmente */
+}
+
+.ImgHeiWid64 {
+	height: 64px;
+	width: 64px;
+}
+</style>
+		<p:card
+			style="display: flex; justify-content: center; align-items: center; height: 80vh;  margin: 0; height: 100vh;">
+			<h:form id="form1">
+				<div class="Wid50 BorderedBox MarLeft05 Width25">
+
+					<h2 style="color: #262eac;">Criar Conta</h2>
+
+					<div align="center">
+						<div class="card">
+							<p:panelGrid columns="1" layout="grid" styleClass="ui-fluid"
+								columnClasses="ui-grid-col-12">
+								<p:column>
+									<p:outputLabel value="E-mail" for="nomeLogin1"
+										style="text-align: left;" />
+									<p:inputText id="nomeLogin1" type="email"
+										value="#{beanCadastro.email}" required="true">
+										<f:validateRegex
+											pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+											message="E-mail inválido. Insira um e-mail no formato correto." />
+									</p:inputText>
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Repetir E-mail" for="nomeLogin2"
+										style="text-align: left;" />
+									<p:inputText id="nomeLogin2"
+										value="#{beanCadastro.confirmaEmail}" required="true" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Senha" for="password"
+										style="text-align: left;" />
+									<p:password id="password" toggleMask="true"
+										style="width: -webkit-fill-available;"
+										value="#{beanCadastro.senha}" autocomplete="new-password"
+										feedback="true" required="true" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Confirmar Senha" for="passwordConfirm"
+										style="text-align: left;" />
+									<p:password id="passwordConfirm" toggleMask="true"
+										style="width: -webkit-fill-available;"
+										value="#{beanCadastro.confirmaSenha}"
+										autocomplete="new-password" required="true" />
+								</p:column>
+							</p:panelGrid>
+							<br />
+							<p:column>
+								<p:commandButton id="cadastrar" value="Cadastrar"
+									action="#{beanCadastro.cadastrarUsuario()}" ajax="false"
+									icon="pi pi-user" />
+							</p:column>
+						</div>
+					</div>
+					<p:growl>
+						<p:autoUpdate />
+					</p:growl>
+					<p:messages>
+						<p:autoUpdate />
+					</p:messages>
+				</div>
+			</h:form>
+		</p:card>
+	</ui:define>
+</ui:composition>
+</html>

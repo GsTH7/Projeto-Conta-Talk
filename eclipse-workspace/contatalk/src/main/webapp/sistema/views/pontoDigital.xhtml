@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+		<style>
+.ui-datepicker table, .ui-datepicker table * {
+	width: 30px !important;
+}
+</style>
+		<h:form id="form1">
+			<div class="ui-fluid">
+				<p:card>
+					<h1>Ponto Digital</h1>
+					<br />
+					<h:form id="form1">
+						<div class="ui-fluid">
+							<p:datePicker id="inline" inline="true" locale="br"
+								value="#{beanAdmin.data}"
+								maxdate="#{beanAdmin.bloqueiaDataPosterior()}" />
+							<br /> <br />
+							<h:outputText value="Informe o Horário:" />
+							<br /> <br />
+							<p:selectOneRadio value="#{beanAdmin.radio}">
+								<f:selectItem itemLabel="Entrada" itemValue="0" />
+								<f:selectItem itemLabel="Saída" itemValue="1" />
+							</p:selectOneRadio>
+							<br /> <br />
+							<div>
+								<p:inputMask value="#{beanAdmin.horario}" mask="99:99" />
+								<br /> <br />
+								<p:outputLabel value="Total de horas somadas mensal: " />
+								<h:outputText id="hrExtra" value="#{beanAdmin.sumTime()}" />
+								<br /> <br />
+								<h:panelGroup rendered="#{beanAdmin.localizacao}">
+									<h:outputText value="Localização confirmada " escape="false" />
+									<i class="fa fa-map-marker"></i>
+								</h:panelGroup>
+							</div>
+						</div>
+					</h:form>
+					<br />
+					<div align="center">
+						<p:commandButton value="Agende um horário" style="width: 50%;"
+							update="dialog" oncomplete="PF('dialog').show();" />
+					</div>
+					<p:growl>
+						<p:autoUpdate />
+					</p:growl>
+					<p:messages>
+						<p:autoUpdate />
+					</p:messages>
+				</p:card>
+			</div>
+			<p:dialog
+				header="A confirmação de horário será enviado no seu e-mail."
+				widgetVar="dialog" id="dialog"
+				style="width: 100vw; height: 100vh; max-width: none; max-height: none;"
+				dynamic="false" closeOnEscape="true" position="center" modal="true"
+				resizable="false">
+				<br />
+				<br />
+				<h:outputText value="#{beanAdmin.formataData()}" />
+				<br />
+				<br />
+				<br />
+				<div>
+					<p:commandButton value="Cancelar" onclick="PF('dialog').hide();"
+						style="width: 45%; margin-right: 10%;" />
+					<p:commandButton oncomplete="PF('dialog').hide();"
+						value="Confirmar" style="width: 45%;" update="@form"
+						actionListener="#{beanAdmin.salvar()}" />
+				</div>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
+	lang="pt-br">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="head">
+		<link rel="stylesheet" href="../resources/css/acesso-layout.css" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<p:card style="width: 100vw; height: 100vh; box-sizing: border-box;">
+			<h2 style="font-family: Arial, sans-serif;">Tutorial</h2>
+			<br />
+			<br />
+			<p:video value="/sistema/resources/video/contatalkvideo.mp4"
+				player="mp4" controls="true" width="380" height="380"
+				onplay="console.log('Iniciado')"
+				onpause="console.log('Pausado')">
+        		Seu navegador não suporta o elemento vídeo. Ver: 
+        		<h:outputLink value="/sistema/resources/video/contatalkvideo.mp4">HTML5 Video</h:outputLink>
+			</p:video>
+		</p:card>
+		<script type="text/javascript" src="../resources/js/acesso-action.js"></script>
+	</ui:define>
+</ui:composition>
+</html>

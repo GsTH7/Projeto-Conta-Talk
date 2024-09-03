@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      lang="pt-br"> 
+
+<ui:composition template="template.xhtml">
+	<ui:define name="head">
+		<link rel="stylesheet" href="../resources/css/questionario-layout.css" />
+	</ui:define>
+	
+	<ui:define name="conteudo">	
+	    <div class="container">
+	        <h1>Questionário de Literatura</h1><br />
+	        <h:form id="form1">
+	        
+	        	<h:messages globalOnly="true" infoClass="info-message" warnClass="warn-message" errorClass="error-message"/>
+	        	
+	        	<h:panelGroup id="tab1" rendered="#{beanQuestionario.tabIndex == 0}">
+		            <div class="question">
+		            	<p:outputLabel for="nome" value="Nome Completo"/>
+		            	<p:inputText id="nome" value="#{beanQuestionario.nome}" maxlength="64"/>
+		            </div>
+		            <div class="question">
+						<p:outputLabel for="idade" value="Idade"/>
+		            	<p:inputNumber id="idade" value="#{beanQuestionario.idade}" maxValue="14" decimalPlaces="0" />
+		            </div>
+		            <div class="question">
+						<p:outputLabel for="sexo" value="Qual o seu gênero"/>
+		            	<p:selectOneRadio id="sexo" value="#{beanQuestionario.sexo}">
+		            		<f:selectItems value="#{beanQuestionario.sexos}"/>
+		            	</p:selectOneRadio>
+		            </div>
+		            <div class="question">
+		                <p:outputLabel for="turma" value="Turma"/>
+		                <p:selectOneMenu id="turma" value="#{beanQuestionario.turmaSelecionada}" autoWidth="false">
+							<f:selectItems value="#{beanQuestionario.listaTurmas}" />
+						</p:selectOneMenu>
+		            </div>
+		            <div class="question">
+						<p:outputLabel for="escola" value="Escola"/>
+		                <p:selectOneMenu id="escola" value="#{beanQuestionario.escolaSelecionada}" autoWidth="false">
+							<f:selectItems value="#{beanQuestionario.listaEscolas}" />
+						</p:selectOneMenu>
+		            </div>
+	            </h:panelGroup>
+	            
+	            <h:panelGroup id="tab2" rendered="#{beanQuestionario.tabIndex == 1}">
+		            <div class="question">
+						<p:outputLabel for="habitoLeitura" value="Você lê bastante?"/>
+		                <p:selectOneMenu id="habitoLeitura" value="#{beanQuestionario.habitoLeitura}" autoWidth="false">
+							<f:selectItems value="#{beanQuestionario.listaHabitoLeitura}" />
+						</p:selectOneMenu>
+		            </div>
+		            <div class="question">
+						<p:outputLabel for="frequencia" value="Frequenta a biblioteca?"/>
+		                <p:selectOneMenu id="frequencia" value="#{beanQuestionario.frequencia}" autoWidth="false">
+							<f:selectItems value="#{beanQuestionario.listaFrequencia}" />
+						</p:selectOneMenu>
+		            </div>
+		            <div class="question">
+						<p:outputLabel for="incentivoPais" value="Seus pais ti incentivam a ler?" />
+						<p:selectOneMenu id="incentivoPais" value="#{beanQuestionario.incentivoPais}" autoWidth="false">
+							<f:selectItems value="#{beanQuestionario.listaIncentivoPais}" />
+						</p:selectOneMenu>
+					</div>
+		            <div class="question">
+						<p:outputLabel for="genero" value="Qual tipo de livro você mais gosta de ler?" />
+						<p:selectOneMenu id="genero" value="#{beanQuestionario.genero}" autoWidth="false">
+							<f:selectItems value="#{beanQuestionario.listaGenero}" />
+						</p:selectOneMenu>
+		            </div>
+		            <div class="question">
+						<p:outputLabel for="pontoPositivo" value="O que ti faz gostar de um livro?" />
+						<p:selectOneMenu id="pontoPositivo" value="#{beanQuestionario.pontoPositivo}" autoWidth="false">
+							<f:selectItems value="#{beanQuestionario.listaPontoPositivo}" />
+						</p:selectOneMenu>
+		            </div>
+		            <div class="question">
+						<p:outputLabel for="pontoNegativo" value="E o que faz voce não gostar?" />
+						<p:selectOneMenu id="pontoNegativo" value="#{beanQuestionario.pontoNegativo}" autoWidth="false">
+							<f:selectItems value="#{beanQuestionario.listaPontoNegativo}" />
+						</p:selectOneMenu>
+		            </div>
+	            </h:panelGroup>
+	            
+	            <h:panelGroup id="tab3" rendered="#{beanQuestionario.tabIndex == 2}">
+					<div class="conclusao-container">
+					    <h2>Parabéns!</h2>
+					    <i class='pi pi-check-circle conclusao-icon'></i>
+					    <p>Você concluiu o questionário com sucesso.</p>
+					</div>
+	            </h:panelGroup>
+				<div class="ui-fluid">
+					<p:panelGrid rendered="#{beanQuestionario.tabIndex != 2}" layout="grid" columns="3"
+						columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4">
+						<p:column>
+							<p:commandButton rendered="#{beanQuestionario.tabIndex != 0}" icon="fa fa-arrow-left" update="@form" action="#{beanQuestionario.voltar()}" value="Voltar"/>
+						</p:column>
+						<p:column />
+						<p:column>
+							<p:commandButton icon="#{beanQuestionario.tabIndex == 0 ? 'fa fa-arrow-right' : 'fa fa-check'}" iconPos="right" update="@form" 
+								action="#{beanQuestionario.proximo()}" value="#{beanQuestionario.descricaoButtonNext()}"/>
+						</p:column>
+					</p:panelGrid>
+				</div>
+			</h:form>
+	        
+	    </div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,37 @@
+.acesso-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 17rem;
+}
+
+.card {
+	width: 200px;
+	height: 200px;
+	background-color: #f9f9f9;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	margin: 0 20px;
+	padding: 20px;
+	text-align: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease;
+	cursor: pointer;
+}
+
+.card img {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 20px;
+}
+
+.card p {
+	font-size: 18px;
+	color: #333;
+	font-weight: bold;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}

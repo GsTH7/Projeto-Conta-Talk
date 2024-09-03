@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+      lang="pt-br"> 
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+	    <div class="container" style="max-width: 90vw;">
+	        <h1>Relatórios</h1><br />
+	        <h:form id="form1">
+	        	<div class="ui-fluid">
+		        <p:panel id="filtros" styleClass="panel-header-clicavel" header="Filtros" toggleable="true" toggleableHeader="true" collapsed="true">
+		        	<f:facet name="actions">
+		                Total de alunos: <p:badge severity="success" value="#{beanAdmin.listaAlunos.size()}" styleClass="mr-2"></p:badge>
+		            </f:facet>
+
+						<p:panelGrid styleClass="ui-panelgrid-blank" layout="grid" columns="3"
+							columnClasses="ui-grid-col-6, ui-grid-col-3, ui-grid-col-3">
+							<p:column>
+								<p:outputLabel for="sexo" value="Sexo" />
+								<p:selectOneRadio id="sexo" value="#{beanAdmin.sexo}" unselectable="true">
+									<f:selectItems value="#{beanQuestionario.sexos}" />
+								</p:selectOneRadio>
+							</p:column>
+							<p:column>
+								<p:outputLabel for="habitoLeitura" value="Você lê bastante?"/>
+				                <p:selectOneMenu id="habitoLeitura" value="#{beanAdmin.habitoLeitura}" autoWidth="false">
+									<f:selectItems value="#{beanAdmin.listaHabitoLeitura}" />
+								</p:selectOneMenu>
+				            </p:column>
+				            <p:column>
+								<p:outputLabel for="frequencia" value="Frequenta a biblioteca?"/>
+				                <p:selectOneMenu id="frequencia" value="#{beanAdmin.frequencia}" autoWidth="false">
+									<f:selectItems value="#{beanAdmin.listaFrequencia}" />
+								</p:selectOneMenu>
+				            </p:column>
+						</p:panelGrid>
+						
+						<p:panelGrid styleClass="ui-panelgrid-blank" layout="grid" columns="3"
+							columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-6">
+							<p:column>
+								<p:outputLabel for="idadeInicial" value="Idade Inicial" />
+								<p:spinner id="idadeInicial" value="#{beanAdmin.idadeInicial}" min="4" max="12"/>
+							</p:column>
+							<p:column>
+								<p:outputLabel for="idadeFinal" value="Idade Final" />
+								<p:spinner id="idadeFinal" value="#{beanAdmin.idadeFinal}" min="4" max="12"/>
+							</p:column>
+							<p:column>
+								<p:outputLabel for="incentivoPais" value="Seus pais ti incentivam a ler?" />
+								<p:selectOneMenu id="incentivoPais" value="#{beanAdmin.incentivoPais}" autoWidth="false">
+									<f:selectItems value="#{beanAdmin.listaIncentivoPais}" />
+								</p:selectOneMenu>
+							</p:column>
+						</p:panelGrid>
+
+						<p:panelGrid styleClass="ui-panelgrid-blank ui-fluid" layout="grid" columns="3" 
+							columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-6">
+							<p:column>
+								<p:outputLabel for="dataInicial" value="Data Cadastro Inicial" />
+								<p:datePicker id="dataInicial" value="#{beanAdmin.dataInicial}" pattern="dd/MM/yyyy" locale="br"/>
+							</p:column>
+							<p:column>
+								<p:outputLabel for="dataFinal" value="Data Cadastro Final" />
+								<p:datePicker id="dataFinal" value="#{beanAdmin.dataFinal}" pattern="dd/MM/yyyy" locale="br"/>
+							</p:column>
+							<p:column>
+								<p:outputLabel for="genero" value="Qual tipo de livro você mais gosta de ler?" />
+								<p:selectOneMenu id="genero" value="#{beanAdmin.genero}" autoWidth="false">
+									<f:selectItems value="#{beanAdmin.listaGenero}" />
+								</p:selectOneMenu>
+				            </p:column>
+						</p:panelGrid>
+						<p:panelGrid styleClass="ui-panelgrid-blank ui-fluid" layout="grid" columns="2" 
+							columnClasses="ui-grid-col-6, ui-grid-col-6">
+							<p:column>
+								<p:outputLabel for="pontoPositvo" value="O que ti faz gostar de um livro?" />
+								<p:selectOneMenu id="pontoPositvo" value="#{beanAdmin.pontoPositivo}" autoWidth="false">
+									<f:selectItems value="#{beanAdmin.listaPontoPositivo}" />
+								</p:selectOneMenu>
+				            </p:column>
+							<p:column>
+								<p:outputLabel for="pontoNegativo" value="E o que faz voce não gostar?" />
+								<p:selectOneMenu id="pontoNegativo" value="#{beanAdmin.pontoNegativo}" autoWidth="false">
+									<f:selectItems value="#{beanAdmin.listaPontoNegativo}" />
+								</p:selectOneMenu>
+							</p:column>	
+						</p:panelGrid>
+						
+						<p:panelGrid layout="grid" columns="4" columnClasses="ui-grid-col-4,ui-grid-col-2,ui-grid-col-2,ui-grid-col-4">
+							<p:column />
+							<p:column>
+								<p:commandButton icon="pi pi-trash" value="Limpar" action="#{beanAdmin.limpar()}" 
+								update="filtros, form1:tabv:chart1, form1:tabv:chart2,  form1:tabv:listAlunos" />
+							</p:column>
+							<p:column>
+								<p:commandButton icon="pi pi-search" value="Pesquisar" action="#{beanAdmin.pesquisar()}" 
+								update="filtros, form1:tabv:chart1, form1:tabv:chart2,  form1:tabv:listAlunos" />
+							</p:column>
+							<p:column />
+						</p:panelGrid>
+		    		</p:panel>
+		    	</div>
+	        
+	        	<p:tabView id="tabv">
+	        		<p:tab title="Gráfico Por Escolas">
+						<p:barChart id="chart1" model="#{beanAdmin.graficoPorEscolas}"/>
+					</p:tab>
+					
+					<p:tab title="Gráfico Total">
+						<p:barChart id="chart2" model="#{beanAdmin.graficoTotal}"/>
+					</p:tab>
+					
+					<p:tab title="Lista de Alunos">
+						<p:dataTable id="listAlunos" value="#{beanAdmin.listaAlunos}"
+							emptyMessage="Sem dados." var="aluno" rowKey="#{aluno.id}"
+							rows="10" paginator="true" paginatorPosition="bottom">
+							<p:column headerText="Nome" style="width: 20%;">
+								<h:outputText value="#{aluno.nome}" />
+							</p:column>
+							<p:column headerText="Idade"
+								style="width: 5%; text-align: center;">
+								<h:outputText value="#{aluno.idade}" />
+							</p:column>
+							<p:column headerText="Sexo" style="width: 10%;">
+								<h:outputText value="#{aluno.sexo}" />
+							</p:column>
+							<p:column headerText="Turma" style="width: 10%;">
+								<h:outputText
+									value="#{beanAdmin.getDescricaoTurma(aluno.turma)}" />
+							</p:column>
+							<p:column headerText="Escola" style="width: 25%;">
+								<h:outputText
+									value="#{beanAdmin.getDescricaoEscola(aluno.escola)}" />
+							</p:column>
+							<p:column headerText="Data e hora cadastro"
+								style="width: 20%; text-align: center;">
+								<h:outputText value="#{aluno.dataHrCadastro}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo"/>
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Respostas"
+								style="width: 10%; text-align: center;">
+								<p:commandButton icon="pi pi-eye" styleClass="rounded-button" action="#{beanAdmin.visualizarRespostas(aluno)}" update="respostasAluno" oncomplete="PF('respostasAluno').show();"/>
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+				</p:tabView>
+				
+			</h:form>
+		</div>
+		
+		<p:dialog id="respostasAluno" widgetVar="respostasAluno" modal="true" width="50vw" header="Repostas feitas pelo aluno: #{beanAdmin.questionarioAluno.aluno.nome}">
+			<h:form id="form2">
+				<p:panelGrid layout="grid" columns="1" columnClasses="ui-grid-col-12">
+					<p:outputLabel value="Você lê bastante?"/>
+	                <p:inputText styleClass="campoVisualizar" value="#{beanAdmin.getDescricaoHabito(beanAdmin.questionarioAluno.habitoLeitura)}" readonly="true"/>
+	                
+					<p:outputLabel value="Frequenta a biblioteca?"/>
+	                <p:inputText styleClass="campoVisualizar" value="#{beanAdmin.getDescricaoFrequencia(beanAdmin.questionarioAluno.frequencia)}" readonly="true"/>
+	                
+					<p:outputLabel value="Seus pais ti incentivam a ler?" />
+					<p:inputText styleClass="campoVisualizar" value="#{beanAdmin.getDescricaoIncentivo(beanAdmin.questionarioAluno.incentivoPais)}" readonly="true"/>
+					
+					<p:outputLabel value="Qual tipo de livro você mais gosta de ler?" />
+					<p:inputText styleClass="campoVisualizar" value="#{beanAdmin.getDescricaoGenero(beanAdmin.questionarioAluno.genero)}" readonly="true"/>
+					
+					<p:outputLabel value="O que ti faz gostar de um livro?" />
+					<p:inputText styleClass="campoVisualizar" value="#{beanAdmin.getDescricaoPontoPositivo(beanAdmin.questionarioAluno.pontoPositivo)}" readonly="true"/>
+					
+					<p:outputLabel value="E o que faz voce não gostar?" />
+					<p:inputText styleClass="campoVisualizar" value="#{beanAdmin.getDescricaoPontoNegativo(beanAdmin.questionarioAluno.pontoNegativo)}" readonly="true"/>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+	</ui:define>
+</ui:composition>
+</html>

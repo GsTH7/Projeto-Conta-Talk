@@ -1,0 +1,25 @@
+.question {
+    margin-bottom: 20px;
+}
+
+.question .ui-outputlabel {
+    font-size: 18px;
+    color: #555;
+}
+
+.ui-inputtext,
+.ui-selectonemenu {
+    width: 100%;
+}
+
+.conclusao-container {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conclusao-icon {
+	font-size: 9rem;
+	color: #021738;
+	padding: 1rem;
+}

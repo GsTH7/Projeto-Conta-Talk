@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      lang="pt-br"> 
+
+<ui:composition template="template.xhtml">
+	<ui:define name="head">
+		<link rel="stylesheet" href="../resources/css/acesso-layout.css" />
+	</ui:define>
+	
+	<ui:define name="conteudo">
+	    <div class="container">
+	        <h1>Acesso</h1><br/>
+	        <h2>Seja bem vindo!</h2>
+	        <div class="acesso-container">
+		         <div class="card" onclick="acessarAdmin();">
+		        	<img class="image-icon" src="../resources/image/admin.png" alt="Ícone do Administrador" />
+		        	<p>Administrador</p>
+		    	</div>
+		
+		    	<div class="card" onclick="acessarEstudante();">
+		       	 	<img class="image-icon" src="../resources/image/student.png" alt="Ícone do Aluno" />
+		        	<p>Aluno</p>
+		    	</div>
+	    	</div>
+	    </div>
+	    
+	    <script type="text/javascript" src="../resources/js/acesso-action.js"></script>
+    </ui:define>
+</ui:composition>
+</html>

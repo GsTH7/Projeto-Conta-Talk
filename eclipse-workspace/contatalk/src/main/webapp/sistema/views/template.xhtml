@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
+	lang="pt-br">
+<h:head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Conta Talk</title>
+	<link rel="stylesheet" href="../resources/css/global.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/font-awesome.css"
+		integrity="sha512-72McA95q/YhjwmWFMGe8RI3aZIMCTJWPBbV8iQY3jy1z9+bi6+jHnERuNrDPo/WGYEzzNs4WdHNyyEr/yXJ9pA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<ui:insert name="head" />
+</h:head>
+<body>
+	<h:form>
+		<div class="top-bar"
+			style="display: flex; justify-content: space-between; align-items: center; background-color: #021738; padding: 10px;">
+
+			<a class="layout-menu-button layout-topbar-icon" href="#"
+				onclick="PF('sidebarMenu').show(); return false;"> <i
+				class="pi pi-bars" style="font-size: 32px; color: white;" />
+			</a>
+
+			<h:link id="home-link" outcome="/sistema/views/acesso"
+				styleClass="home-TopBar layout-topbar-icon">
+				<h:panelGroup style="display: grid;">
+					<p:graphicImage value="/sistema/resources/image/watan.png"
+						style="margin: auto; width: 50px; height: 50px;" />
+				</h:panelGroup>
+			</h:link>
+		</div>
+		<p:sidebar id="sidebarMenu" widgetVar="sidebarMenu" position="left">
+			<p:tabMenu orientation="left" style="width:15rem;">
+				<p:menuitem value="Gestão de Pessoas" icon="fa fa-user"
+					outcome="/sistema/views/gestaoDePessoas.xhtml" />
+				<p:menuitem value="Ponto Digital" icon="fa fa-calendar-o"
+					outcome="/sistema/views/pontoDigital.xhtml" />
+				<p:menuitem value="Suporte" icon="fa fa-phone"
+					outcome="/sistema/views/peguntasFrequentes.xhtml" />
+				<p:menuitem value="Compartilhe" icon="fa fa-share"
+					outcome="/sistema/views/compartilhe.xhtml" />
+				<p:menuitem value="Documentos" icon="fa fa-file-text-o"
+					outcome="/sistema/views/documentos.xhtml" />
+				<p:menuitem value="Tutorial" icon="fa fa-book"
+					outcome="/sistema/views/tutorial.xhtml" />
+				<p:menuitem value="Calendário" icon="fa fa-calendar"
+					outcome="/sistema/views/calendario.xhtml" />
+				<p:menuitem value="Sair" actionListener="#{beanCadastro.logout()}" />
+			</p:tabMenu>
+		</p:sidebar>
+	</h:form>
+	<script src="../resources/js/primefaces-auxiliar.js"></script>
+	<ui:insert name="conteudo" />
+</body>
+</html>
